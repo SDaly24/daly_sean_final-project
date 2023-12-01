@@ -105,7 +105,7 @@ class Game:
             self.draw()
 
     def update(self):
-        #changes changes
+        #I am changing something sala
         # moves them up when player is in the top 4th of screen
         if self.player.rect.y < HEIGHT/4:
             for p in self.all_platforms:
