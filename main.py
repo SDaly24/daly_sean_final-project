@@ -15,6 +15,7 @@ Make a new level in a new "dimension" with a background and different looking mo
 # content from kids can code: http://kidscancode.org/blog/
 # Mr. Cozort in class
 # Teo during free period
+# https://www.youtube.com/watch?v=j9yMFG3D7fg
 
 '''
 Goals: Reach the rainbow platform
@@ -114,7 +115,7 @@ class Game:
         # checks on number of plats and adds more if needed (based in killing plats of screen...)
         if len(self.all_platforms) < 6:
             for i in range(1,3):
-                plat = Platform(randint(0,WIDTH), 0, 200, 35, "moving", (255,255,255))
+                plat = Platform(randint(0,WIDTH), 0, 200, 35, "moving",)
                 self.all_sprites.add(plat)
                 self.all_platforms.add(plat)
 
