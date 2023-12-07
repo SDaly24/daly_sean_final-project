@@ -14,11 +14,12 @@ Make a new level in a new "dimension" with a background and different looking mo
 # This file was created by Sean Daly
 # content from kids can code: http://kidscancode.org/blog/
 # Mr. Cozort in class
-# Teo during free period
+# Teo LeClaire
+# Alex Aguerria
 # https://www.youtube.com/watch?v=j9yMFG3D7fg
 
 '''
-Goals: Reach the rainbow platform
+Goals: Reach the rainbow platform 
 Rules: move in the air and don't fall to the bottom of the map
 Feedback: can view player hp/points
 Freedom: run side to side, jump, drop
@@ -28,6 +29,8 @@ When Mobs are hit, players loses a point
 Add different platforms
 When player has 0 points, the player respawns
 Player can't move off the screen: when moving left, player respawns right and visa versa
+Player can move up on the screen
+
 '''
 
 # import libraries and modules
@@ -86,7 +89,7 @@ class Game:
         self.all_platforms.add(self.ice_plat)
         self.all_ice_plats.add(self.ice_plat)
 
-        for m in range(0,5):
+        for m in range(0,15):
             # this generates 5 random "mobs" across the screen
             m = Mob(randint(0, WIDTH), randint(0, math.floor(HEIGHT/2)), 20, 20, "normal")
             # gives mobs their own sprite or class
@@ -106,18 +109,44 @@ class Game:
             self.draw()
 
     def update(self):
-        #I am changing something sala
         # moves them up when player is in the top 4th of screen
-        if self.player.rect.y < HEIGHT/4:
-            for p in self.all_platforms:
-                p.vel.y = -self.player.vel.y
+        if self.player.rect.top <= HEIGHT / 4:
+            # changes the y value of the player to become the absolute Y value.
+            self.player.pos.y += abs(self.player.vel.y)
+            # this adjusts the y positions of the platforms to keep them down
+            for plat in self.all_platforms:
+                plat.rect.y += abs(self.player.vel.y)
+            # this adjusts the y positions of the mobs to keep them down
+            for mob in self.all_mobs:
+                mob.rect.y += abs(self.player.vel.y)
+        
 
         # checks on number of plats and adds more if needed (based in killing plats of screen...)
         if len(self.all_platforms) < 6:
-            for i in range(1,3):
-                plat = Platform(randint(0,WIDTH), 0, 200, 35, "moving",)
+            for i in range(1):
+                plat = Platform(randint(0,WIDTH-10),-10, 50, 20, "moving",)
                 self.all_sprites.add(plat)
                 self.all_platforms.add(plat)
+            for i in range(1):
+                plat = Platform(randint(0,WIDTH-10), -200, 50, 20, "new level")
+                self.all_sprites.add(plat)
+                self.all_platforms.add(plat)
+            # adds an additional ice platform
+            for i in range(1):
+                ice = Ice(self, randint(0, WIDTH-10), -100, 50, 20, "moving",)
+                self.all_sprites.add(ice)
+                self.all_platforms.add(ice)
+        if len(self.all_mobs) < 6:
+            for i in range(0,15):
+                m = Mob(randint(0, WIDTH), randint(-(HEIGHT/2),0), 20, 20, "normal")
+                # gives mobs their own sprite or class
+                self.all_sprites.add(m)
+                self.all_mobs.add(m)
+
+            
+        
+
+        
 
         self.all_sprites.update()
         # defines that the game updates if a player collides with a mob
@@ -201,8 +230,11 @@ class Game:
     def show_go_screen(self):
         pass
 
+#class GameState():
+   # def _init_(self):
+    #    self.state = 'main_game'
 
-
+    #def main_game(self)
 g = Game()
 while g.running:
     g.new()
