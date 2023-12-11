@@ -41,3 +41,4 @@ PLATFORM_LIST_NEW_LEVEL = [(0, HEIGHT - 40, WIDTH, 40, "normal"),
 ICE_PLATFORM_LIST_NEW_LEVEL = [(222, 200, 100, 20, "normal")]
 
 MOB_LIST_NEW_LEVEL = [(randint(0, WIDTH), randint(0, math.floor(HEIGHT/2)), 20, 20, "normal")]
+

@@ -63,6 +63,9 @@ class Game:
         pg.display.set_caption("My Game...")
         self.clock = pg.time.Clock()
         self.running = True
+        # instantiate a level counter
+        self.current_level = 1
+        
     
     def new_level(self):
         # Code to initialize a new level
@@ -70,9 +73,6 @@ class Game:
         self.all_platforms = pg.sprite.Group()
         self.all_ice_plats = pg.sprite.Group()
         self.all_mobs = pg.sprite.Group()
-
-        # Update background color for the new level
-        self.screen.fill(YELLOW)
 
         # Instantiate classes and add instances to groups for the new level
         self.player = Player(self)
@@ -96,6 +96,9 @@ class Game:
             mob = Mob(*m)
             self.all_sprites.add(mob)
             self.all_mobs.add(mob)
+        
+        # changes the new levels screen to yellow
+        self.screen.fill(YELLOW)
 
         self.run()
 
@@ -162,6 +165,7 @@ class Game:
             # this adjusts the y positions of the mobs to keep them down
             for mob in self.all_mobs:
                 mob.rect.y += abs(self.player.vel.y)
+        
         # Check if the player hits the platform with the category "new level"
         new_level_hit = pg.sprite.spritecollide(self.player, self.all_platforms, False, pg.sprite.collide_rect)
         if new_level_hit:
