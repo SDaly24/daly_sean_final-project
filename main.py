@@ -8,7 +8,7 @@
 Make the screen move up with the player
 Make the level end onces the player reaches the final platform
 Add platforms that move vertically as well as horizontally
-Make a new level in a new "dimension" with a background and different looking mobs
+Make a new level in a new "dimension" with a background
 '''
 
 # This file was created by Sean Daly
@@ -64,6 +64,44 @@ class Game:
         self.clock = pg.time.Clock()
         self.running = True
     
+    def new_level(self):
+        # Code to initialize a new level
+        self.all_sprites = pg.sprite.Group()
+        self.all_platforms = pg.sprite.Group()
+        self.all_ice_plats = pg.sprite.Group()
+        self.all_mobs = pg.sprite.Group()
+
+        # Update background color for the new level
+        self.screen.fill(YELLOW)
+
+        # Instantiate classes and add instances to groups for the new level
+        self.player = Player(self)
+        self.all_sprites.add(self.player)
+
+        # Create platforms for the new level
+        for p in PLATFORM_LIST_NEW_LEVEL:
+            plat = Platform(*p)
+            self.all_sprites.add(plat)
+            self.all_platforms.add(plat)
+
+        # Create ice platforms for the new level
+        for i in ICE_PLATFORM_LIST_NEW_LEVEL:
+            ice = Ice(self, *i)
+            self.all_sprites.add(ice)
+            self.all_platforms.add(ice)
+            self.all_ice_plats.add(ice)
+
+        # Create mobs for the new level
+        for m in MOB_LIST_NEW_LEVEL:
+            mob = Mob(*m)
+            self.all_sprites.add(mob)
+            self.all_mobs.add(mob)
+
+        self.run()
+
+
+        
+
     def new(self):
         # create a group for all sprites
         # defines the score of the player
@@ -124,6 +162,11 @@ class Game:
             # this adjusts the y positions of the mobs to keep them down
             for mob in self.all_mobs:
                 mob.rect.y += abs(self.player.vel.y)
+        # Check if the player hits the platform with the category "new level"
+        new_level_hit = pg.sprite.spritecollide(self.player, self.all_platforms, False, pg.sprite.collide_rect)
+        if new_level_hit:
+            if new_level_hit[0].category == "new level":
+                self.new_level()
         
 
         # checks on number of plats and adds more if needed (based in killing plats of screen...)
@@ -235,11 +278,7 @@ class Game:
     def show_go_screen(self):
         pass
 
-#class GameState():
-   # def _init_(self):
-    #    self.state = 'main_game'
 
-    #def main_game(self)
 g = Game()
 while g.running:
     g.new()
