@@ -89,10 +89,15 @@ class Game:
         self.all_platforms.add(self.ice_plat)
         self.all_ice_plats.add(self.ice_plat)
 
-        for m in range(0,15):
-            # this generates 5 random "mobs" across the screen
+        for m in range(0,8):
+            # this generates 8 random "mobs" across the screen
             m = Mob(randint(0, WIDTH), randint(0, math.floor(HEIGHT/2)), 20, 20, "normal")
             # gives mobs their own sprite or class
+            self.all_sprites.add(m)
+            self.all_mobs.add(m)
+        for m in range (0,7):
+            # this generates 7 random mobs above the y-intercept from the original screen
+            m = Mob(randint(0, WIDTH), randint(-math.floor(HEIGHT/2),0), 20, 20, "normal")
             self.all_sprites.add(m)
             self.all_mobs.add(m)
 
