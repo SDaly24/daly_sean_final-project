@@ -23,6 +23,7 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
+PURPLE = (128, 0, 128)
 
 # gives the coordinates for the platforms and their platform "type"
 PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40, "normal"),

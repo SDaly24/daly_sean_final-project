@@ -65,6 +65,8 @@ class Game:
         self.running = True
         # instantiate a level counter
         self.current_level = 1
+        if self.new_level():
+            self.current_level == 2
         
     
     def new_level(self):
@@ -76,17 +78,22 @@ class Game:
 
         # Instantiate classes and add instances to groups for the new level
         self.player = Player(self)
+        self.player.update_level(self.current_level)
         self.all_sprites.add(self.player)
 
         # Create platforms for the new level
         for p in PLATFORM_LIST_NEW_LEVEL:
             plat = Platform(*p)
+            # Sets up the current_level for each platform
+            plat.current_level = self.current_level
             self.all_sprites.add(plat)
             self.all_platforms.add(plat)
 
         # Create ice platforms for the new level
         for i in ICE_PLATFORM_LIST_NEW_LEVEL:
             ice = Ice(self, *i)
+            # Sets up the current_level for each ice platform
+            ice.current_level = self.current_level
             self.all_sprites.add(ice)
             self.all_platforms.add(ice)
             self.all_ice_plats.add(ice)
@@ -94,12 +101,16 @@ class Game:
         # Create mobs for the new level
         for m in MOB_LIST_NEW_LEVEL:
             mob = Mob(*m)
+            # Sets up the current_level for each mob
+            mob.current_level = self.current_level
             self.all_sprites.add(mob)
             self.all_mobs.add(mob)
-        
-        # changes the new levels screen to yellow
-        self.screen.fill(YELLOW)
 
+        #Update the player's level
+        self.player.update_level(self.current_level)
+
+        
+        
         self.run()
 
 
@@ -154,6 +165,20 @@ class Game:
             self.update()
             self.draw()
 
+            # fill the screen yellow for the second level
+            if self.current_level == 1:
+                self.screen.fill(BLACK)
+            elif self.current_level == 2:
+                self.screen.fill(YELLOW)
+            
+            self.all_sprites.draw(self.screen)
+            self.draw_text("Score: " + str(self.score), 22, WHITE, WIDTH/2, HEIGHT/10)
+        
+            
+            pg.display.flip()
+
+            self.draw()
+
     def update(self):
         # moves them up when player is in the top 4th of screen
         if self.player.rect.top <= HEIGHT / 4:
@@ -171,6 +196,7 @@ class Game:
         if new_level_hit:
             if new_level_hit[0].category == "new level":
                 self.new_level()
+                self.current_level += 1
         
 
         # checks on number of plats and adds more if needed (based in killing plats of screen...)

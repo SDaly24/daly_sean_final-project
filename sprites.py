@@ -75,6 +75,26 @@ class Player(Sprite):
         self.pos += self.vel + 0.5 * self.acc
         self.rect.midbottom = self.pos
 
+    def update_level(self, new_level):
+        self.current_level = new_level
+
+    def update(self):
+        # CHECKING FOR COLLISION WITH MOBS HERE>>>>>
+        mhits = pg.sprite.spritecollide(self, self.game.all_mobs, False)
+        if mhits:
+            score =- 1
+        self.acc = vec(0, PLAYER_GRAV)
+        self.controls()
+        # if friction - apply here
+        self.acc.x += self.vel.x * -PLAYER_FRIC
+        # self.acc.y += self.vel.y * -0.3
+        # equations of motion
+        self.vel += self.acc
+        self.pos += self.vel + 0.5 * self.acc
+        self.rect.midbottom = self.pos
+
+    def update_level(self, new_level):
+        self.current_level = new_level
 # platforms
 
 class Platform(Sprite):
@@ -87,17 +107,30 @@ class Platform(Sprite):
         self.rect.y = y
         self.category = category
         self.speed = 0
+        # sets up the initial level of the platform
+        self.current_level = 1
         if self.category == "moving":
             self.speed = 5  
         if self.category == "new level":
             self.image.fill(WHITE) 
     # if the platform hits the edge of the screen, it's speed flips
+    #def update(self):
+    def update_level(self, new_level):
+        self.current_level = new_level
+        if self.current_level == 2:
+            self.image.fill(RED)
+
     def update(self):
         if self.category == "moving":
             self.rect.x += self.speed
             if self.rect.x + self.rect.w > WIDTH or self.rect.x < 0:
                 self.speed = -self.speed
         
+    #def update_level(self, new_level):
+        # once we get to the next level, the platforms turn red
+        #self.current_level = new_level
+        #if self.current_level == 2:
+                #self.image.fill(RED)
 
 # creates a new sprite named ice
 class Ice(Sprite):
@@ -136,3 +169,12 @@ class Mob(Sprite):
         self.rect.y = y
         self.kind = kind
         self.pos = vec(WIDTH/2, HEIGHT/2)
+        # Sets up the current level of the Mob class
+        self.current_level = 1
+
+    def update_level(self, new_level):
+        self.current_level = new_level
+        print("Mob current_level:", self.current_level)
+        # once we get to level 2, the mobs turn purple
+        if self.current_level == 2:
+            self.image.fill(PURPLE)
