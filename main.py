@@ -65,8 +65,6 @@ class Game:
         self.running = True
         # instantiate a level counter
         self.current_level = 1
-        if self.new_level():
-            self.current_level == 2
         
     
     def new_level(self):
@@ -162,19 +160,16 @@ class Game:
         while self.playing:
             self.clock.tick(FPS)
             self.events()
-            self.update()
-            self.draw()
-
+            
             # fill the screen yellow for the second level
             if self.current_level == 1:
                 self.screen.fill(BLACK)
             elif self.current_level == 2:
                 self.screen.fill(YELLOW)
             
+            self.update()
             self.all_sprites.draw(self.screen)
             self.draw_text("Score: " + str(self.score), 22, WHITE, WIDTH/2, HEIGHT/10)
-        
-            
             pg.display.flip()
 
             self.draw()
