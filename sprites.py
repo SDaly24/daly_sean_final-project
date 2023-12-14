@@ -57,7 +57,6 @@ class Player(Sprite):
     def jump(self):
         hits = pg.sprite.spritecollide(self, self.game.all_platforms, False)
         if hits:
-            print("i can jump")
             self.vel.y = -PLAYER_JUMP
         
     def update(self):
@@ -98,7 +97,7 @@ class Player(Sprite):
 # platforms
 
 class Platform(Sprite):
-    def __init__(self, x, y, w, h, category):
+    def __init__(self, x, y, w, h, category, new_level=False):
         Sprite.__init__(self)
         self.image = pg.Surface((w, h))
         self.image.fill(GREEN)
@@ -106,6 +105,7 @@ class Platform(Sprite):
         self.rect.x = x
         self.rect.y = y
         self.category = category
+        self.new_level = new_level
         self.speed = 0
         # sets up the initial level of the platform
         self.current_level = 1

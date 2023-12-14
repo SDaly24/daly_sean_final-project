@@ -26,18 +26,18 @@ YELLOW = (255, 255, 0)
 PURPLE = (128, 0, 128)
 
 # gives the coordinates for the platforms and their platform "type"
-PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40, "normal"),
-                 (WIDTH / 2 - 50, HEIGHT * 3 / 4, 100, 20,"normal"),
-                 (125, HEIGHT - 350, 100, 20, "moving"),
+PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40, "normal", False),
+                 (WIDTH / 2 - 50, HEIGHT * 3 / 4, 100, 20,"normal", False),
+                 (125, HEIGHT - 350, 100, 20, "moving", False),
                  #(222, 200, 100, 20, "normal"),
-                 (175, 100, 50, 20, "normal")]
+                 (175, 100, 50, 20, "normal", False)]
 
 # Add new lists for the platforms, ice platforms, and mobs in the "new level"
-PLATFORM_LIST_NEW_LEVEL = [(0, HEIGHT - 40, WIDTH, 40, "normal"),
-                           (WIDTH / 3 - 50, HEIGHT * 2 / 4, 100, 20,"normal"),
-                           (130, HEIGHT - 200, 100, 20, "moving"),
+PLATFORM_LIST_NEW_LEVEL = [(0, HEIGHT - 40, WIDTH, 40, "normal", True),
+                           (WIDTH / 3 - 50, HEIGHT * 2 / 4, 100, 20,"normal", True),
+                           (130, HEIGHT - 200, 100, 20, "moving", True),
                            #(222, 200, 100, 20, "normal"),
-                           (300, 50, 50, 20, "normal")]
+                           (300, 50, 50, 20, "normal", True)]
 
 ICE_PLATFORM_LIST_NEW_LEVEL = [(222, 200, 100, 20, "normal")]
 

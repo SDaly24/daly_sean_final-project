@@ -68,6 +68,7 @@ class Game:
         
     
     def new_level(self):
+        print("Entering new level")
         # Code to initialize a new level
         self.all_sprites = pg.sprite.Group()
         self.all_platforms = pg.sprite.Group()
@@ -108,7 +109,7 @@ class Game:
         self.player.update_level(self.current_level)
 
         
-        
+        print("exiting new level")
         self.run()
 
 
@@ -160,6 +161,8 @@ class Game:
         while self.playing:
             self.clock.tick(FPS)
             self.events()
+            self.update()
+            self.draw()
             
             # fill the screen yellow for the second level
             if self.current_level == 1:
@@ -170,9 +173,9 @@ class Game:
             self.update()
             self.all_sprites.draw(self.screen)
             self.draw_text("Score: " + str(self.score), 22, WHITE, WIDTH/2, HEIGHT/10)
+            
             pg.display.flip()
 
-            self.draw()
 
     def update(self):
         # moves them up when player is in the top 4th of screen
@@ -189,8 +192,10 @@ class Game:
         # Check if the player hits the platform with the category "new level"
         new_level_hit = pg.sprite.spritecollide(self.player, self.all_platforms, False, pg.sprite.collide_rect)
         if new_level_hit:
+            print("Collided with platform:", new_level_hit[0].category)
             if new_level_hit[0].category == "new level":
                 self.new_level()
+                print("Entering new level")
                 self.current_level += 1
         
 
