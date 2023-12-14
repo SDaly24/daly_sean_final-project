@@ -12,8 +12,8 @@ HEIGHT = 768
 FPS = 30
 
 # player settings
-PLAYER_JUMP = 30
-PLAYER_GRAV = 1.5
+PLAYER_JUMP = 25
+PLAYER_GRAV = 1
 PLAYER_FRIC = 0.2
 
 # define colors

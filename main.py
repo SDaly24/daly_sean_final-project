@@ -108,8 +108,10 @@ class Game:
         #Update the player's level
         self.player.update_level(self.current_level)
 
-        
-        print("exiting new level")
+        # adds 1 to the current level
+        self.current_level += 1
+
+        print("exiting new level" )
         self.run()
 
 
@@ -156,6 +158,7 @@ class Game:
     
 
     def run(self):
+        print("Current Level:", self.current_level)
         # while the program is running, the program is checking for updates across events updates and draw
         self.playing = True
         while self.playing:
@@ -165,10 +168,11 @@ class Game:
             self.draw()
             
             # fill the screen yellow for the second level
-            if self.current_level == 1:
+            if self.current_level == 2:
+                self.screen.fill(PURPLE)
+            elif self.current_level == 1:
                 self.screen.fill(BLACK)
-            elif self.current_level == 2:
-                self.screen.fill(YELLOW)
+            
             
             self.update()
             self.all_sprites.draw(self.screen)
@@ -192,7 +196,7 @@ class Game:
         # Check if the player hits the platform with the category "new level"
         new_level_hit = pg.sprite.spritecollide(self.player, self.all_platforms, False, pg.sprite.collide_rect)
         if new_level_hit:
-            print("Collided with platform:", new_level_hit[0].category)
+            #print("Collided with platform:", new_level_hit[0].category)
             if new_level_hit[0].category == "new level":
                 self.new_level()
                 print("Entering new level")

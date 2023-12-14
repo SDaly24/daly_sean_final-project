@@ -68,7 +68,7 @@ class Player(Sprite):
         self.controls()
         # if friction - apply here
         self.acc.x += self.vel.x * -PLAYER_FRIC
-        # self.acc.y += self.vel.y * -0.3
+        self.acc.y += self.vel.y * -0.3
         # equations of motion
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
@@ -117,8 +117,7 @@ class Platform(Sprite):
     #def update(self):
     def update_level(self, new_level):
         self.current_level = new_level
-        if self.current_level == 2:
-            self.image.fill(RED)
+        
 
     def update(self):
         if self.category == "moving":
@@ -151,8 +150,8 @@ class Ice(Sprite):
     def update(self):
         self.cd.ticking()
         if self.cd.delta > 2 and self.tagged:
-            print("time to die...")
-            print("the delta is " + str(self.cd.delta))
+            #print("time to die...")
+            #print("the delta is " + str(self.cd.delta))
             self.kill()        
                 
         
@@ -176,5 +175,4 @@ class Mob(Sprite):
         self.current_level = new_level
         print("Mob current_level:", self.current_level)
         # once we get to level 2, the mobs turn purple
-        if self.current_level == 2:
-            self.image.fill(PURPLE)
+        
