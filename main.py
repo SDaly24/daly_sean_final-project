@@ -177,8 +177,15 @@ class Game:
             self.all_sprites.draw(self.screen)
             self.draw_text("Score: " + str(self.score), 22, WHITE, WIDTH/2, HEIGHT/10)
             
-            pg.display.flip()
+            # Displays "You Win" once the third level is reached
+            if self.current_level == 3:
+                self.draw_text("You Win!", 100, WHITE, WIDTH/2, HEIGHT/2)
+                self.draw_text("Exit to play again!", 50, WHITE, WIDTH/2, HEIGHT/2 + 200)
 
+                #pg.time.delay(2000)
+                #self.playing = False
+        
+            pg.display.flip()
 
     def update(self):
         # moves them up when player is in the top 4th of screen

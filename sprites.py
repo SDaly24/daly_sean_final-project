@@ -112,7 +112,7 @@ class Platform(Sprite):
         if self.category == "moving":
             self.speed = 5  
         if self.category == "new level":
-            self.image.fill(WHITE) 
+            self.image.fill(WHITE)
     # if the platform hits the edge of the screen, it's speed flips
     #def update(self):
     def update_level(self, new_level):
