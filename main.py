@@ -120,6 +120,9 @@ class Game:
     def new(self):
         # create a group for all sprites
         # defines the score of the player
+        self.background_stars = pg.image.load(os.path.join(img_folder, 'stars.jpg')).convert()
+        self.background_earth = pg.image.load(os.path.join(img_folder, 'earth.jpg')).convert()
+        #self.background_rect = self.background.get_rect()
         self.score = 10
         self.all_sprites = pg.sprite.Group()
         self.all_platforms = pg.sprite.Group()
@@ -168,9 +171,11 @@ class Game:
             
             # fill the screen yellow for the second level
             if self.current_level == 2:
-                self.screen.fill(PURPLE)
+                self.screen.fill(BLACK)
+                self.screen.blit(self.background_earth, (0,0))
             elif self.current_level == 1:
                 self.screen.fill(BLACK)
+                self.screen.blit(self.background_stars, (0,0))
             
             self.update()
             
@@ -293,6 +298,7 @@ class Game:
                 
     def draw(self):
         ############ Draw ################
+
         # draw the background screen
         #self.screen.fill(BLACK)
         # draw all sprites

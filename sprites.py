@@ -113,6 +113,8 @@ class Platform(Sprite):
             self.speed = 5  
         if self.category == "new level":
             self.image.fill(WHITE)
+    
+    
     # if the platform hits the edge of the screen, it's speed flips
     #def update(self):
     def update_level(self, new_level):
@@ -125,11 +127,7 @@ class Platform(Sprite):
             if self.rect.x + self.rect.w > WIDTH or self.rect.x < 0:
                 self.speed = -self.speed
         
-    #def update_level(self, new_level):
-        # once we get to the next level, the platforms turn red
-        #self.current_level = new_level
-        #if self.current_level == 2:
-                #self.image.fill(RED)
+    
 
 # creates a new sprite named ice
 class Ice(Sprite):
