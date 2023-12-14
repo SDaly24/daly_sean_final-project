@@ -164,7 +164,6 @@ class Game:
         while self.playing:
             self.clock.tick(FPS)
             self.events()
-            self.update()
             self.draw()
             
             # fill the screen yellow for the second level
@@ -173,8 +172,8 @@ class Game:
             elif self.current_level == 1:
                 self.screen.fill(BLACK)
             
-            
             self.update()
+            
             self.all_sprites.draw(self.screen)
             self.draw_text("Score: " + str(self.score), 22, WHITE, WIDTH/2, HEIGHT/10)
             
@@ -226,9 +225,6 @@ class Game:
                 self.all_mobs.add(m)
 
             
-        
-
-        
 
         self.all_sprites.update()
         # defines that the game updates if a player collides with a mob
@@ -291,10 +287,12 @@ class Game:
     def draw(self):
         ############ Draw ################
         # draw the background screen
-        self.screen.fill(BLACK)
+        #self.screen.fill(BLACK)
         # draw all sprites
         self.all_sprites.draw(self.screen)
         self.draw_text("Score: " + str(self.score), 22, WHITE, WIDTH/2, HEIGHT/10)
+        # displays the level for the player
+        self.draw_text("Level:" + str(self.current_level), 22, WHITE, WIDTH/2, (HEIGHT/10)+50)
         # buffer - after drawing everything, flip display
         pg.display.flip()
     
