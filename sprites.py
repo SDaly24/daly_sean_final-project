@@ -115,12 +115,12 @@ class Platform(Sprite):
             self.image.fill(WHITE)
     
     
-    # if the platform hits the edge of the screen, it's speed flips
+    
     #def update(self):
     def update_level(self, new_level):
         self.current_level = new_level
         
-
+    # if the platform hits the edge of the screen, it's speed flips
     def update(self):
         if self.category == "moving":
             self.rect.x += self.speed
@@ -160,7 +160,7 @@ class Mob(Sprite):
     def __init__(self, x, y, w, h, kind):
         Sprite.__init__(self)
         self.image = pg.Surface((w, h))
-        self.image.fill(RED)
+        self.image.fill(BLACK)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -169,8 +169,5 @@ class Mob(Sprite):
         # Sets up the current level of the Mob class
         self.current_level = 1
 
-    def update_level(self, new_level):
-        self.current_level = new_level
-        print("Mob current_level:", self.current_level)
-        # once we get to level 2, the mobs turn purple
+ 
         
